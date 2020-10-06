@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+void insertionSort(int arr[], int n) {
+    int i, key, j;
+    for (i = 1; i < n; i++) {
+	key = arr[i];
+	j = i - 1;
+
+	while (j >= 0 && arr[j] > key) {
+	    arr[j + 1] = arr[j];
+	    j = j - 1;
+	}
+	arr[j + 1] = key;
+    }
+}
+
+void printMaxActivities(int s[], int f[], int n)
+{
+    int i, j;
+
+    printf ("Following activities are selected : ");
+      i = 0;
+    printf("%d ", i);
+    for (j = 1; j < n; j++)
+    {
+      if (s[j] >= f[i])
+      {
+	  printf ("%d ", j+1);
+	  i = j;
+      }
+    }
+}
+
+int main() {
+
+    clock_t start_t, end_t;
+    double total_t;
+    int i;
+    int f[10],s[10],n;
+    printf("Enter the number of Meetings :");
+    scanf("%d",&n);
+    printf("Enter the Starting Time & Ending Time of the Meetings");
+    for(i=0;i<n;i++)
+    {
+	    printf("\nEnter the Start Time of Meeting %d :",i+1);
+      scanf("%d",&f[i]);
+      printf("\nEnter the Ending Time of Meeting %d :",i+1);
+      scanf("%d",&s[i]);
+    }
+    insertionSort(f,n);
+    insertionSort(s,n);
+    printMaxActivities(s,f,n);
+    end_t = clock();
+    total_t = (double)end_t - start_t/CLOCKS_PER_SEC;
+    printf("\n\nTotal time taken by CPU for selection sort: %f\n", total_t  );
+    getch();
+    return 0;
+}

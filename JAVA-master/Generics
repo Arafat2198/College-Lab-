@@ -1,0 +1,42 @@
+import java.util.*;
+
+class multigen<T1,T2>
+{
+   T1 a;
+   T2 b;
+   multigen(T1 a1,T2 a2)
+   {
+     a=a1;
+     b=a2;
+   }
+   T1 retype1()
+   {
+     return a;
+   }
+   T2 retype2()
+   {
+     return b;
+   }
+   void display()
+   {
+    System.out.println("a= "+a+" b= "+b);
+   }
+}
+
+class gdemo
+{
+public static void main(String args[])
+{
+   multigen<Integer,Character> m1=new multigen<Integer,Character>(666,'+');
+   multigen<String,String> m2=new multigen<String,String>("Hi","Hey");
+   int l=m1.retype1();
+   char x=m1.retype2();
+   System.out.println(l+" "+x);
+   String c1=m2.retype1();
+   String x1=m2.retype2();
+   System.out.println(c1+" "+x1);    
+   m1.display();
+   m2.display(); 
+}
+
+}
