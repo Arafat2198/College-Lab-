@@ -1,0 +1,37 @@
+import java.util.*;
+
+interface SAFE_DRIVING
+{
+  public static int Safe_Speed=50 ;
+  public static void speed_Of_the_vehicle();
+}
+
+class drive implements SAFE_DRIVING
+{
+   int speed;
+  public void speed_Of_the_vehicle()
+  {
+    Scanner s=new Scanner(System.in);
+    System.out.println("Enter the speed of the Vehicle in km/hr: ");
+    speed=s.nextInt();
+  }
+  public String toString()
+  {
+    String str;
+    if(speed>Safe_Speed)
+    str="Drive slow";
+    else
+    str="Safe Driving";
+    return str;
+  }
+}
+
+class united
+{
+  public static void main(String[] args)
+  {
+    drive ob=new drive();
+    ob.speed_Of_the_vehicle();
+    System.out.println(ob);
+  }
+}

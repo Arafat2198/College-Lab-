@@ -1,0 +1,141 @@
+#include <stdio.h>d
+#include <stdlib.h>
+
+struct node {
+	 int data;
+	 struct node *next;
+};
+
+typedef struct node * NODE;
+
+NODE getnode() {
+	 NODE p;
+	 p = (NODE) malloc(sizeof(struct node));
+	 if (p != NULL) return p;
+	 else {
+		  printf("No Memory \n");
+		  return NULL;
+	 }
+}
+
+NODE insert_front(int item, NODE head) {
+	 NODE p;
+	 clrscr();
+	 p = getnode();
+	 p -> data = item;
+	 p -> next = head;
+	 head = p;
+	 printf("Inserted \n");
+	 return head;
+}
+
+void insert_back(int item, NODE head) {
+	 NODE p, q;
+	 clrscr();
+	 q = getnode();
+	 q -> data = item;
+	 q -> next = NULL;
+	 p = head;
+	 while (p -> next != NULL) p = p -> next;
+	 p -> next = q;
+	 printf("Inserted \n");
+}
+
+
+void display (NODE head) {
+	 NODE p;
+	 clrscr();
+	 if (head == NULL) {
+		  printf("Empty List \n");
+		  return;
+	 }
+	 p = head;
+	 while (p != NULL) {
+		  printf("%d \n", p -> data);
+		  p = p -> next;
+	 }
+}
+
+NODE insert_pos(NODE head,int pos,int ele)
+{
+	 NODE prev=NULL,cur,p;
+	 int count=1;
+	 clrscr();
+	 p=getnode();
+	 p->data=ele;
+	 p->next=NULL;
+	 if(head==NULL)
+	  {
+	     p->next=NULL;
+	     printf("Inserted\n");
+	     return p;
+	  }
+	 else
+	  {
+	     cur=head;
+	     while(cur!=NULL && count!=pos)
+	      {
+		prev=cur;
+		cur=cur->next;
+		count++;
+	      }
+	     if(count == pos)
+	      {
+		printf("Inserted\n");
+		prev->next=p;
+		p->next=cur;
+		return head;
+	      }
+	     else
+	      {
+	       printf("Invalid Position\n");
+	       return head;
+	      }
+       }
+}
+int main() {
+	 int choice, pos, ele;
+	 char ch;
+	 NODE head = NULL;
+	 clrscr();
+
+	 do {
+		  printf("1. Enter from Front \n");
+		  printf("2. Enter from End \n");
+		  printf("3. Enter from any position \n");
+	printf("4. Display\n");
+	printf("5. exit\n\n");
+		  printf("Enter Choice \n");
+		  scanf("%d", &choice);
+
+		  switch (choice) {
+				case 1: printf("Enter Element \n");
+						  scanf("%d", &ele);
+						  head = insert_front(ele, head);
+						  break;
+
+				case 2: printf("Enter Element \n");
+						  scanf("%d", &ele);
+						  insert_back(ele, head);
+						  break;
+
+				case 3: printf("Enter Element\n");
+						  scanf("%d",&ele);
+					printf("Enter Position\n");
+						  scanf("%d",&pos);
+						  head=insert_pos(head,pos,ele);
+						  break;
+				case 4: printf("The List is as follows\n");
+						  display(head);
+						  break;
+		 case 5: exit(0);
+						  break;
+
+				default: printf("Invalid Choice \n");
+		  }
+
+
+	 } while (choice != 5);
+
+	 return 0;
+}
